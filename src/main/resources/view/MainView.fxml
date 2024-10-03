@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane prefHeight="653.0" prefWidth="1032.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ImageController">
+
+    <children>
+
+        <!-- ScrollPane for Image View -->
+        <ScrollPane fx:id="imageScrollPane" hbarPolicy="NEVER" layoutX="440.0" layoutY="65.0" pannable="true" prefHeight="345.0" prefWidth="396.0" styleClass="image-scroll-pane" vbarPolicy="NEVER">
+            <BorderPane fx:id="imagePane">
+                <center>
+                    <ImageView fx:id="imageView" fitHeight="312.0" fitWidth="362.0" preserveRatio="true" />
+                </center>
+            </BorderPane>
+        </ScrollPane>
+
+        <!-- Image Container ScrollPane -->
+        <ScrollPane fx:id="listimageScrollPane" fitToWidth="true" layoutX="440.0" layoutY="425.0" prefHeight="150.0" prefWidth="569.0" styleClass="image-scroll-pane" vbarPolicy="NEVER">
+            <HBox fx:id="imageContainer" alignment="CENTER" prefHeight="150.0" spacing="10.0">
+                <VBox alignment="CENTER" prefWidth="150.0">
+                    <ImageView fx:id="myImageView" fitHeight="130.0" fitWidth="150.0" preserveRatio="true" />
+                </VBox>
+            </HBox>
+        </ScrollPane>
+
+        <!-- Result Container ScrollPane -->
+        <ScrollPane fx:id="resultScrollPane" hbarPolicy="NEVER" layoutX="850.0" layoutY="65.0" prefHeight="345.0" prefWidth="160.0" styleClass="image-scroll-pane">
+            <VBox fx:id="resultContainer" alignment="CENTER" prefWidth="150.0" spacing="15.0" />
+        </ScrollPane>
+
+        <!-- Zoom Controls -->
+        <HBox fx:id="scaleHbox" alignment="CENTER" layoutX="457.0" layoutY="355.0" prefHeight="30.0" prefWidth="361.0" spacing="10" visible="false">
+            <Button fx:id="zoomInButton" onAction="#onZoomIn" prefHeight="30.0" prefWidth="32.0" styleClass="zoom-button" text="+" />
+            <Button fx:id="zoomOutButton" onAction="#onZoomOut" prefHeight="30.0" prefWidth="32.0" styleClass="zoom-button" text="-" />
+            <Button fx:id="resetZoomButton" minHeight="21.0" onAction="#onResetZoom" prefHeight="30.0" prefWidth="32.0" styleClass="zoom-button" text="↺" />
+        </HBox>
+
+        <!-- Save All Images Button -->
+        <HBox layoutX="900.0" layoutY="595.0">
+            <Button fx:id="saveAllButton" onAction="#onSaveAllImage" styleClass="button-info" text="Save all result" />
+        </HBox>
+
+        <!-- Selection Buttons -->
+        <HBox layoutX="450.0" layoutY="595.0" spacing="10">
+            <Button fx:id="selectButton" onAction="#onSelectImages" styleClass="button-primary" text="Select" />
+            <Button fx:id="selectAllButton" onAction="#onSelectAllImages" styleClass="button-primary" text="Select All" />
+            <Button fx:id="confirmSelectButton" disable="true" onAction="#onConfirmSelect" styleClass="button-primary" text="Confirm Select" />
+        </HBox>
+
+        <!-- Previous/Next Image Buttons -->
+        <Button fx:id="previousImage" layoutX="465.0" layoutY="230.0" onAction="#onPreviousImage" styleClass="zoom-button" text="◀" visible="false" />
+        <Button fx:id="nextImage" layoutX="785.0" layoutY="230.0" onAction="#onNextImage" styleClass="zoom-button" text="▶" visible="false" />
+              <!-- Clear List Buttons -->
+
+        <MenuBar prefHeight="31.0" prefWidth="1061.0" styleClass="menu-bar">
+            <menus>
+                <Menu styleClass="bar" text="File">
+                    <items>
+                        <MenuItem onAction="#onClearListImage" styleClass="menu-item" text="Clear selected" />
+                        <MenuItem fx:id="clearStored" mnemonicParsing="false" onAction="#onClearStored" styleClass="menu-item" text="Clear image" />
+                        <MenuItem onAction="#onClearResultImage" styleClass="menu-item" text="Clear result image" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <!-- Main Left Sidebar -->
+        <VBox layoutX="35.0" layoutY="66.0" prefHeight="550.0" prefWidth="396.0" spacing="15" styleClass="sidebar">
+            <!-- File Drag Area -->
+            <Label fx:id="dropArea" prefHeight="84.0" prefWidth="361.0" styleClass="drop-area" text="   Drag and drop a file here" textAlignment="CENTER">
+                <graphic>
+                    <Button onAction="#onChooseFile" styleClass="button-primary" text="Upload image" />
+                </graphic>
+            <VBox.margin>
+               <Insets left="10.0" />
+            </VBox.margin>
+            </Label>
+
+            <!-- Crop Buttons -->
+            <HBox prefHeight="30.0" prefWidth="374.0" spacing="10">
+                <Button fx:id="startCropButton" disable="true" onAction="#onStartCrop" prefHeight="30.0" prefWidth="120.0" styleClass="button-primary" text="⛶ Start Crop" />
+                <Button fx:id="batchCrop" disable="true" onAction="#onGoToBatchCrop" prefHeight="30.0" prefWidth="120.0" styleClass="button-primary" text="Batch Crop" />
+                <Button fx:id="confirmCropButton" disable="true" onAction="#onConfirmCrop" prefHeight="30.0" prefWidth="120.0" styleClass="button-primary" text="Confirm Crop" />
+            <VBox.margin>
+               <Insets />
+            </VBox.margin>
+            </HBox>
+
+            <!-- Algorithm Selection and Detect Button -->
+            <HBox spacing="10">
+                <ComboBox fx:id="algorithmChoice" prefHeight="41.0" prefWidth="211.0" promptText="Select Method" />
+                <Button fx:id="detectButton" onAction="#onDetectEdges" prefHeight="30.0" prefWidth="138.0" styleClass="button-info" text="Detect Edges">
+               <HBox.margin>
+                  <Insets left="19.0" />
+               </HBox.margin></Button>
+            </HBox>
+
+            <!-- StackPane for Detection Options -->
+            <HBox spacing="10">
+                <StackPane fx:id="optionsStackPane">
+                    <!-- Laplacian Options -->
+                    <HBox fx:id="lapicianOption" spacing="10" visible="false">
+                        <Label text="Kernel Size:" />
+                        <ComboBox fx:id="LapicianmaskSizeComboBox" prefWidth="100.0">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="3x3" />
+                                    <String fx:value="5x5" />
+                                    <String fx:value="7x7" />
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+                    </HBox>
+
+                    <!-- Canny Options -->
+                    <VBox fx:id="cannyOptions" spacing="10" visible="false">
+                        <HBox spacing="10">
+                            <Label text="Low Threshold:" />
+                            <Slider fx:id="lowThresholdSlider" max="255" min="1" prefWidth="100.0" value="10" />
+                            <Label fx:id="lowThresholdLabel" />
+                        </HBox>
+                        <HBox spacing="10">
+                            <Label text="High Threshold:" />
+                            <Slider fx:id="highThresholdSlider" max="255" min="1" prefWidth="100.0" value="90" />
+                            <Label fx:id="highThresholdLabel" />
+                        </HBox>
+                    </VBox>
+
+                    <!-- Gaussian Options -->
+                    <VBox fx:id="gaussianOptions" spacing="5" visible="false">
+                        <HBox spacing="10">
+                            <Label text="Sigma:" />
+                            <Slider fx:id="gaussianSigmaSlider" max="5.0" min="0.5" prefWidth="100.0" value="1.4" />
+                            <Label fx:id="gaussianSigmaLabel" />
+                        </HBox>
+                        <HBox spacing="10">
+                            <Label text="Kernel Size:" />
+                            <ComboBox fx:id="gaussianKernelSizeComboBox" prefWidth="80.0" />
+                        </HBox>
+                    </VBox>
+
+                    <!-- Sobel Options -->
+                    <VBox fx:id="sobelOptions" spacing="5" visible="false">
+                        <HBox spacing="10">
+                            <Label text="Kernel Size:" />
+                            <ComboBox fx:id="sobelKernelSizeComboBox" prefWidth="80.0" />
+                        </HBox>
+                        <HBox spacing="10">
+                            <Label text="Threshold:" />
+                            <Slider fx:id="sobelThresholdSlider" max="255" min="0" prefWidth="100.0" value="50" />
+                            <Label fx:id="sobelThresholdLabel" />
+                        </HBox>
+                    </VBox>
+
+                    <!-- Prewitt Options -->
+                    <VBox fx:id="prewittOptions" spacing="5" visible="false">
+                        <HBox spacing="10">
+                            <Label text="Kernel Size:" />
+                            <ComboBox fx:id="prewittKernelSizeComboBox" prefWidth="80.0" />
+                        </HBox>
+                        <HBox spacing="10">
+                            <Label text="Threshold:" />
+                            <Slider fx:id="prewittThresholdSlider" max="255" min="0" prefWidth="100.0" value="50" />
+                            <Label fx:id="prewittThresholdLabel" />
+                        </HBox>
+                    </VBox>
+
+                    <!-- Robert Options -->
+                    <HBox fx:id="robertContainer" spacing="10" visible="false">
+                        <Label text="Strength:" />
+                        <Slider fx:id="strengthSlider" max="10" min="1" value="5" />
+                        <Label fx:id="strengthValueLabel" />
+                    </HBox>
+                </StackPane>
+            </HBox>
+
+            <!-- Set Default Button -->
+            <HBox fx:id="setDefaultOption" spacing="10" visible="false">
+                <Button fx:id="setDefaultButton" onAction="#setDefaults" styleClass="button-neutral" text="Set Default" />
+            <VBox.margin>
+               <Insets bottom="10.0" />
+            </VBox.margin>
+            </HBox>
+
+               <!-- Save Button -->
+            <Button fx:id="saveButton" onAction="#onSaveImage" prefHeight="30.0" prefWidth="130.0" styleClass="button-info" text="Save Image">
+            <VBox.margin>
+               <Insets left="245.0" />
+            </VBox.margin>
+         </Button>
+
+            <!-- Save, Revert, and Confirm Edit Buttons -->
+            <HBox spacing="10">
+                <Button fx:id="revertButton" onAction="#onRevertToOriginal" styleClass="button-secondary" text="Revert to Original" />
+                <Button fx:id="confirmEditButton" disable="true" onAction="#onConfirmEdit" prefHeight="30.0" prefWidth="130.0" styleClass="button-primary" text="Confirm Edit">
+               <HBox.margin>
+                  <Insets left="107.0" />
+               </HBox.margin></Button>
+            </HBox>
+
+            <!-- Progress Bar -->
+            <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="295.0" spacing="10">
+                <ProgressBar fx:id="progressBar" prefHeight="17.0" prefWidth="282.0" />
+                <Label fx:id="progressLabel" text="No processing" />
+            <VBox.margin>
+               <Insets top="5.0" />
+            </VBox.margin>
+            </HBox>
+
+            <!-- Status Label -->
+            <Label fx:id="statusLabel" text="" />
+         <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" styleClass="text-scroll-pane" vbarPolicy="NEVER">
+            <content>
+                  <!-- File Status Text Flow -->
+                  <TextFlow fx:id="fileStatus" prefWidth="320.0" />
+            </content>
+         </ScrollPane>
+        </VBox>
+
+        <!--ตกแต่ง -->
+      <ImageView fx:id="pictureIcon" fitHeight="203.0" fitWidth="236.0" layoutX="535.0" layoutY="140.0" opacity="0.13" preserveRatio="true" visible="true">
+         <image>
+            <Image url="@../assets/pictureicon.png" />
+         </image>
+      </ImageView>
+        <Label fx:id="uploadImageLabel" alignment="CENTER" layoutX="452.0" layoutY="446.0" opacity="0.2" prefHeight="116.0" prefWidth="546.0" styleClass="large-label" text="Please upload image 🌄" />
+        <Label fx:id="resultImageLabel" alignment="CENTER" layoutX="864.0" layoutY="82.0" opacity="0.2" prefHeight="316.0" prefWidth="131.0" styleClass="large-label" text="Result 📩" />
+
+    </children>
+</AnchorPane>

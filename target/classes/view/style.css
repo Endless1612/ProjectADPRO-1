@@ -1,0 +1,287 @@
+
+        /* General Styling */
+    .root {
+    -fx-background-color: #F7F7F7; /* Ultra light grey for minimal aesthetic */
+    -fx-font-family: "San Francisco", "Helvetica Neue", sans-serif; /* Apple's default system font */
+    -fx-text-fill: #444444; /* Medium dark grey for text readability */
+}
+
+        .menu-bar {
+            -fx-background-color: linear-gradient(to bottom, #f8f8f8, #e0e0e0); /* Light gradient for a sleek look */
+            -fx-border-color: #d1d1d1; /* Subtle border */
+            -fx-border-width: 0 0 1px 0; /* Bottom border */
+            -fx-padding: 5 10 5 10; /* Padding for some breathing room */
+            -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 4, 0.0, 0, 2); /* Soft shadow */
+        }
+
+        .menu {
+            -fx-padding: 0 15 0 15; /* Add space between menu items */
+        }
+
+        .menu .label {
+            -fx-text-fill: #333333; /* Darker grey for better contrast */
+            -fx-font-size: 14px; /* Clean, consistent font size */
+            -fx-font-family: "San Francisco", "Helvetica Neue", Helvetica, Arial, sans-serif; /* Apple system font */
+            -fx-font-weight: 400; /* Normal font weight */
+        }
+
+        .menu-item {
+            -fx-background-color: transparent; /* No background by default */
+            -fx-text-fill: #333333; /* Dark grey text */
+            -fx-font-family: "San Francisco", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            -fx-padding: 5 10 5 10; /* Padding for better click area */
+        }
+
+        .menu-item:hover {
+            -fx-background-color: rgba(0, 0, 0, 0.05); /* Slight darkening on hover */
+        }
+
+        .menu-item:focused {
+            -fx-background-color: rgba(0, 122, 255, 0.15); /* Soft blue highlight for focused item */
+            -fx-text-fill: #007aff; /* Apple blue for focused text */
+        }
+
+        .menu-item:selected {
+            -fx-background-color: rgba(0, 122, 255, 0.25); /* Deeper blue for selected item */
+        }
+
+        .separator {
+            -fx-border-color: #d1d1d1; /* Light border color for separator */
+            -fx-padding: 0 5 0 5;
+            -fx-border-width: 0 1px 0 0;
+        }
+
+    /* Primary Action Buttons Styling with Hover Effect */
+    .button-primary {
+        -fx-background-color: #6C6CFF; /* Soft, muted blue for primary actions */
+        -fx-text-fill: white;
+        -fx-font-size: 14px;
+        -fx-background-radius: 10; /* Rounded corners */
+        -fx-border-radius: 10;
+        -fx-cursor: hand;
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0, 0, 2); /* Subtle shadow */
+        -fx-transition: background-color 0.4s ease, padding 0.4s ease; /* Smooth hover transition */
+    }
+
+    .button-primary:hover {
+        -fx-background-color: #4C4CFF; /* Darker blue on hover */
+        -fx-padding: 6px 12px; /* Slightly increased padding for effect */
+    }
+
+    .button-primary:disabled {
+        -fx-background-color: #D0D0D0; /* Light grey for disabled state */
+        -fx-text-fill: #A0A0A0;
+        -fx-cursor: not-allowed;
+    }
+
+    /* Secondary Action Buttons Styling */
+    .button-secondary {
+        -fx-background-color: #E0E0E0; /* Light grey background */
+        -fx-text-fill: #444444;
+        -fx-font-size: 14px;
+        -fx-background-radius: 10;
+        -fx-border-radius: 10;
+        -fx-cursor: hand;
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0, 0, 2);
+        -fx-transition: background-color 0.3s ease, padding 0.3s ease;
+    }
+
+    .button-secondary:hover {
+        -fx-background-color: #C0C0C0; /* Slightly darker grey on hover */
+        -fx-padding: 5px 10px;
+    }
+
+    .button-secondary:disabled {
+        -fx-background-color: #F0F0F0;
+        -fx-text-fill: #A9A9A9;
+    }
+
+    /* Neutral Action Buttons Styling */
+    .button-neutral {
+        -fx-background-color: #F0F0F0;
+        -fx-text-fill: #444444;
+        -fx-font-size: 14px;
+        -fx-background-radius: 10;
+        -fx-border-radius: 10;
+        -fx-cursor: hand;
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0, 0, 2);
+        -fx-transition: background-color 0.3s ease, padding 0.3s ease;
+    }
+
+    .button-neutral:hover {
+        -fx-background-color: #D0D0D0;
+        -fx-padding: 5px 10px;
+    }
+
+    .button-neutral:disabled {
+        -fx-background-color: #F0F0F0;
+        -fx-text-fill: #A9A9A9;
+    }
+
+    /* Information Action Buttons Styling with Hover Effect */
+    .button-info {
+        -fx-background-color: #5FCF80; /* Muted green for positive actions */
+        -fx-text-fill: white;
+        -fx-font-size: 14px;
+        -fx-background-radius: 10;
+        -fx-border-radius: 10;
+        -fx-cursor: hand;
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0, 0, 2);
+        -fx-transition: background-color 0.4s ease, padding 0.4s ease;
+    }
+
+    .button-info:hover {
+        -fx-background-color: #46B56A; /* Darker green on hover */
+        -fx-padding: 6px 12px; /* Slightly larger padding */
+    }
+
+    /* Drag and Drop Area Styling */
+    .drop-area {
+        -fx-border-color: #CCCCCC;
+        -fx-border-width: 2;
+        -fx-background-color: #F9F9F9;
+        -fx-border-style: dashed;
+        -fx-alignment: CENTER;
+        -fx-padding: 25px;
+        -fx-transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+    .drop-area:hover {
+        -fx-border-color: #a080ff;
+        -fx-background-color: #E8E8E8;
+    }
+
+    .drop-area.drag-over {
+        -fx-background-color: #B0B0B0;
+        -fx-text-fill: white;
+    }
+
+    /* ComboBox Styling */
+    .combo-box {
+        -fx-font-size: 12px;
+        -fx-background-radius: 8;
+        -fx-border-radius: 8;
+        -fx-padding: 8px;
+        -fx-border-color: #CCCCCC;
+        -fx-background-color: white;
+        -fx-transition: border-color 0.3s ease;
+    }
+
+    .combo-box:hover {
+        -fx-border-color: #AAB7B8;
+    }
+
+    /* ImageView & ScrollPane Styling */
+    .image-scroll-pane {
+        -fx-background-color: #FFFFFF;
+        -fx-border-color: #E0E0E0;
+        -fx-border-radius: 10;
+        -fx-padding: 15px;
+    }
+
+    .image-view {
+        -fx-effect: dropshadow(two-pass-box, rgba(0,0,0,0.05), 5, 0, 0, 3);
+        -fx-padding: 10px;
+    }
+
+    /* Progress Bar Styling */
+    .progress-bar {
+        -fx-background-color: #FFFFFF;
+        -fx-accent: linear-gradient(to right, #6C6CFF, #5FCF80); /* Soft blue to green gradient */
+        -fx-border-color: #E0E0E0;
+        -fx-border-radius: 10;
+        -fx-background-radius: 10;
+        -fx-pref-height: 20px;
+        -fx-padding: 2;
+    }
+
+    .progress-bar .track {
+        -fx-background-color: transparent;
+    }
+
+    .progress-bar .bar {
+        -fx-background-color: linear-gradient(to right, #6C6CFF, #5FCF80);
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 3, 0, 0, 2);
+        -fx-background-radius: 10;
+    }
+
+    .progress-bar .chunk {
+        -fx-background-color: linear-gradient(to right, #6C6CFF, #5FCF80);
+        -fx-background-radius: 10;
+        -fx-effect: innershadow(two-pass-box, rgba(0,0,0,0.05), 5, 0, 2, 2);
+    }
+
+    /* Slider Styling */
+    .slider {
+        -fx-pref-width: 160px;
+        -fx-border-color: #CCCCCC;
+        -fx-border-radius: 8;
+        -fx-background-color: transparent;
+    }
+
+    /* Zoom Button Styling */
+        /* Zoom Button Styling */
+        /* Updated Zoom Button Styling without -fx-backdrop-filter */
+        /* Zoom Button Styling for visibility on all backgrounds */
+        .zoom-button {
+            -fx-background-color: rgba(203, 201, 201, 0.3); /* More transparent white */
+            -fx-background-radius: 50%;
+            -fx-border-radius: 50%;
+            -fx-border-color: rgba(150, 148, 148, 0.2); /* Subtle border for visibility */
+            -fx-border-width: 2px;
+            -fx-min-width: 25px;  /* Reduced size */
+            -fx-min-height: 25px; /* Reduced size */
+            -fx-text-fill: #000000; /* Dark text for contrast */
+            -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0, 0, 0); /* Stronger shadow */
+            -fx-transition: background-color 0.3s ease, padding 0.3s ease;
+        }
+
+        .zoom-button:hover {
+            -fx-background-color: rgba(255, 255, 255, 0.4); /* Less transparent on hover */
+        }
+
+
+
+    /* Text ScrollPane Styling */
+    .text-scroll-pane {
+        -fx-background-color: transparent; /* Transparent background */
+        -fx-border-color: transparent; /* Hide border */
+        -fx-padding: 0;
+    }
+
+    /* Scrollbar Hidden */
+    .text-scroll-pane .scroll-bar:vertical,
+    .text-scroll-pane .scroll-bar:horizontal {
+        -fx-opacity: 0; /* Hide Scrollbars */
+    }
+
+    /* Scrollbar thumb (handle) will appear on hover if needed */
+    .text-scroll-pane:hover .scroll-bar:vertical,
+    .text-scroll-pane:hover .scroll-bar:horizontal {
+        -fx-opacity: 0.5; /* Show scrollbar on hover */
+    }
+
+    /* Thumb style when visible */
+    .text-scroll-pane .scroll-bar .thumb {
+        -fx-background-color: rgba(0, 0, 0, 0.1); /* Transparent scrollbar */
+        -fx-background-radius: 10; /* Rounded scrollbar thumb */
+        -fx-pref-width: 5px; /* Thin scrollbar */
+    }
+
+    /* Text content inside the ScrollPane */
+    .text-content {
+        -fx-text-fill: #444444; /* สีตัวหนังสือ */
+
+
+        -fx-font-size: 14px; /* ขนาดตัวหนังสือ */
+        -fx-font-family: "San Francisco", "Helvetica Neue", sans-serif; /* Font family */
+        -fx-padding: 10px; /* Padding ภายใน ScrollPane */
+    }
+
+        .large-label {
+            -fx-font-size: 20px;      /* Large font size */
+            -fx-text-fill: #333333;   /* Dark text color for readability */
+            -fx-font-weight: bold;    /* Bold font for emphasis */
+            -fx-alignment: center;    /* Center the text */
+            -fx-padding: 20px;        /* Padding around the text */
+        }
